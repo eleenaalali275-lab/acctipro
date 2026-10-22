@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcctiPro — Your Virtual Accounting Office</title>
+<style>
+:root{--navy:#20265f;--purple:#4035a8;--blue:#eaf2ff;--lav:#f3f0ff;--ink:#1d2544;--muted:#64708b;--line:#dce4f4;--green:#16866b;--red:#d44a5b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f6f8fd;color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1240px;margin:auto;min-height:100vh;display:grid;grid-template-columns:230px 1fr;background:#fff;box-shadow:0 8px 40px #20265f12}
+aside{background:linear-gradient(180deg,#f1efff,#edf5ff);padding:24px 16px;border-right:1px solid var(--line)}.brand{font-size:23px;font-weight:850;color:var(--navy);margin:4px 8px 3px}.brand span{color:#7851c8}.tag{font-size:12px;color:var(--muted);margin:0 8px 28px}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;text-align:left;padding:12px 13px;border-radius:12px;color:#4c5675;font-weight:650}.nav button.active,.nav button:hover{background:#fff;color:var(--purple);box-shadow:0 3px 12px #25236a0c}.aside-note{margin-top:32px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:14px;font-size:12px;color:var(--muted)}
+main{min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;padding:19px 28px;border-bottom:1px solid var(--line);gap:12px}.topbar h1{font-size:21px;margin:0}.pill{border-radius:99px;background:#e5f8f1;color:#167a61;padding:6px 10px;font-size:12px;font-weight:750}.content{padding:24px 28px 36px}.welcome{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}.welcome h2{margin:0 0 5px;font-size:25px}.welcome p{margin:0;color:var(--muted)}.business-select{border:1px solid var(--line);padding:10px 12px;border-radius:10px;background:#fff;color:var(--navy);font-weight:650}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.panel,.task{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 3px 12px #1d2c5b05}.stat .label{font-size:12px;color:var(--muted);font-weight:650}.stat .num{font-size:24px;font-weight:850;margin:8px 0 2px;color:var(--navy)}.stat small{color:var(--muted)}.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.panel{margin-bottom:16px}.panel h3{margin:0 0 13px;font-size:16px}.sub{color:var(--muted);font-size:13px}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.action{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fafbff;text-align:left;color:var(--navy);font-weight:750}.action span{display:block;color:var(--muted);font-weight:450;font-size:12px;margin-top:4px}.primary{border:0;background:var(--purple);color:#fff;border-radius:10px;padding:10px 15px;font-weight:750}.secondary{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:10px;padding:9px 13px;font-weight:700}.danger{color:var(--red)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #edf0f8;white-space:nowrap}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}td.money{text-align:right;font-variant-numeric:tabular-nums}.green{color:var(--green);font-weight:750}.red{color:var(--red);font-weight:750}.bar{height:8px;background:#e8eaf7;border-radius:9px;overflow:hidden;margin:10px 0}.bar div{height:100%;width:12%;background:linear-gradient(90deg,#5143bc,#6b9fff);border-radius:9px}.view{display:none}.view.active{display:block}.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:grid;gap:5px}.field label{font-size:12px;color:var(--muted);font-weight:750}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff;color:var(--ink);width:100%;min-width:0}.field.full{grid-column:1/-1}.form-actions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}.notice{padding:12px 14px;background:#fff8e6;border:1px solid #f4df9c;border-radius:11px;color:#775a10;font-size:13px;margin:12px 0}.success{background:#e9f9f2;border-color:#b6ead5;color:#17674f}.task{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}.task .emoji{font-size:22px}.task p{margin:3px 0;color:var(--muted);font-size:13px}.task strong{display:block}.badge{display:inline-block;border-radius:99px;background:#eeeaff;color:var(--purple);padding:4px 8px;font-size:11px;font-weight:750}.empty{text-align:center;padding:28px;color:var(--muted)}.question{font-size:17px;font-weight:750;margin:14px 0}.answer{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;padding:11px;border-radius:10px;margin:8px 0}.answer:hover{border-color:var(--purple);background:#f8f6ff}.footer{text-align:center;color:var(--muted);font-size:12px;padding:12px}
+@media(max-width:850px){.app{grid-template-columns:1fr}aside{padding:12px;border-right:0;border-bottom:1px solid var(--line)}.brand{display:inline-block;margin-right:12px}.tag{display:inline}.nav{display:flex;overflow:auto;gap:4px}.nav button{white-space:nowrap;padding:9px}.aside-note{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.content{padding:18px}.topbar{padding:15px 18px}.welcome{flex-direction:column}.field-grid{grid-template-columns:1fr}}
+@media(max-width:420px){.grid{gap:8px}.stat{padding:12px}.stat .num{font-size:20px}.actions{grid-template-columns:1fr}.content{padding:13px}}
+</style>
+
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#4035a8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="AcctiPro">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand">▰ Accti<span>Pro</span></div>
+  <div class="tag">Your virtual accounting office</div>
+  <nav class="nav" aria-label="Main navigation">
+    <button class="active" data-view="home">⌂ &nbsp; Dashboard</button>
+    <button data-view="transactions">↔ &nbsp; Transactions</button>
+    <button data-view="journal">▤ &nbsp; Journal entries</button>
+    <button data-view="ledger">▥ &nbsp; General ledger</button>
+    <button data-view="reports">▦ &nbsp; Reports</button>
+    <button data-view="practice">✦ &nbsp; Practice & learn</button>
+  </nav>
+  <div class="aside-note"><strong>Training mode</strong><br>All businesses and transactions are fictional. Practise safely—nothing here is real financial advice or connected to a bank.</div>
+</aside>
+<main>
+  <div class="topbar"><h1 id="pageTitle">Dashboard</h1><span class="pill">YEAR 12 • TRAINING MODE</span></div>
+  <div class="content">
+    <section class="view active" id="home">
+      <div class="welcome"><div><h2>Good evening, trainee accountant 👋</h2><p>Welcome to SwiftTech Supplies. Your virtual business is ready for you.</p></div><select class="business-select" id="businessSelect" aria-label="Choose practice business"><option>SwiftTech Supplies</option><option>Harbour Café</option><option>BrightStart Clothing</option></select></div>
+      <div class="grid">
+        <div class="stat"><div class="label">Transactions recorded</div><div class="num" id="statTransactions">0</div><small>In this practice business</small></div>
+        <div class="stat"><div class="label">Journal entries</div><div class="num" id="statEntries">0</div><small>Double-entry records</small></div>
+        <div class="stat"><div class="label">Tasks completed</div><div class="num" id="statTasks">0 / 5</div><small>Keep practising</small></div>
+        <div class="stat"><div class="label">Bookkeeping status</div><div class="num" id="statStatus" style="font-size:19px">Not started</div><small>Check your trial balance</small></div>
+      </div>
+      <div class="layout">
+        <div>
+          <div class="panel"><h3>Quick actions</h3><div class="actions">
+            <button class="action" onclick="showView('transactions')">＋ Record a transaction<span>Enter a fictional business transaction</span></button>
+            <button class="action" onclick="showView('journal')">⇄ Journal entries<span>Check debit and credit entries</span></button>
+            <button class="action" onclick="showView('ledger')">▤ View general ledger<span>See account balances</span></button>
+            <button class="action" onclick="showView('reports')">▦ Trial balance & reports<span>Prepare statements</span></button>
+          </div></div>
+          <div class="panel"><h3>Latest transactions</h3><div id="recentTransactions" class="table-wrap"><div class="empty">No transactions yet. Start by recording your first transaction.</div></div></div>
+        </div>
+        <div>
+          <div class="panel"><h3>Today's accountant tasks</h3>
+            <div class="task"><span class="emoji">🧾</span><div><strong>1. Record the opening capital</strong><p>The owner invests £5,000 into the business bank account.</p><button class="secondary" onclick="loadTask(0)">Practise this</button></div></div>
+            <div class="task"><span class="emoji">📦</span><div><strong>2. Record a credit purchase</strong><p>Buy inventory for £680 on credit from Bright Supplies.</p><button class="secondary" onclick="loadTask(1)">Practise this</button></div></div>
+            <div class="task"><span class="emoji">💷</span><div><strong>3. Record a cash expense</strong><p>Pay monthly rent of £350 from the bank.</p><button class="secondary" onclick="loadTask(2)">Practise this</button></div></div>
+            <div class="task"><span class="emoji">🛍️</span><div><strong>4. Record a credit sale</strong><p>Sell goods for £1,200 to Riverside Stores on credit.</p><button class="secondary" onclick="loadTask(3)">Practise this</button></div></div>
+            <div class="task"><span class="emoji">⚖️</span><div><strong>5. Check the trial balance</strong><p>Learn whether total debits equal total credits.</p><button class="secondary" onclick="showView('reports')">Open reports</button></div></div>
+            <div class="bar"><div id="progressBar"></div></div><small class="sub" id="progressText">0% of tasks completed</small>
+          </div>
+          <div class="notice"><strong>Remember:</strong> debit does not always mean increase, and credit does not always mean decrease. It depends on the type of account.</div>
+        </div>
+      </div>
+    </section>
+    <section class="view" id="transactions">
+      <div class="panel"><h3>Record a transaction</h3><p class="sub">Enter a transaction from your fictional business. AcctiPro will create a simple double-entry journal automatically. Read the suggested entries and check that you understand them.</p>
+        <form id="transactionForm">
+          <div class="field-grid">
+            <div class="field"><label for="txDate">Date</label><input id="txDate" type="date" required value="2026-10-22"></div>
+            <div class="field"><label for="txType">Transaction type</label><select id="txType"><option value="capital">Owner invests capital</option><option value="cashSale">Cash sale</option><option value="creditSale">Credit sale</option><option value="cashPurchase">Inventory purchase paid immediately</option><option value="creditPurchase">Inventory purchase on credit</option><option value="rent">Pay rent</option><option value="utilities">Pay utilities</option><option value="equipment">Buy equipment from bank</option><option value="receipt">Receive money from a credit customer</option><option value="supplier">Pay a credit supplier</option><option value="drawings">Owner withdraws cash (drawings)</option><option value="loan">Receive a bank loan</option></select></div>
+            <div class="field"><label for="txDescription">Description / other party</label><input id="txDescription" placeholder="e.g. Riverside Stores" required></div>
+            <div class="field"><label for="txAmount">Amount (£)</label><input id="txAmount" type="number" min="0.01" step="0.01" placeholder="e.g. 1200" required></div>
+            <div class="field full"><label for="txNote">Your own explanation (optional)</label><textarea id="txNote" rows="2" placeholder="Explain which account is debited and which is credited…"></textarea></div>
+          </div>
+          <div class="form-actions"><button class="primary" type="submit">Save transaction & create journal</button><button class="secondary" type="reset">Clear form</button></div>
+        </form>
+        <div id="txFeedback" aria-live="polite"></div>
+      </div>
+      <div class="panel"><h3>Transaction log</h3><div id="allTransactions" class="table-wrap"></div></div>
+    </section>
+    <section class="view" id="journal">
+      <div class="panel"><h3>Journal entries — double entry</h3><p class="sub">Every transaction should have equal total debits and credits. These are simplified training entries; inventory cost-of-sales adjustments and VAT are not automatically calculated.</p><div id="journalTable" class="table-wrap"></div></div>
+      <div class="panel"><h3>Double-entry reminder</h3><table><thead><tr><th>Account type</th><th>Increase</th><th>Decrease</th></tr></thead><tbody><tr><td>Assets</td><td class="green">Debit</td><td>Credit</td></tr><tr><td>Expenses</td><td class="green">Debit</td><td>Credit</td></tr><tr><td>Drawings</td><td class="green">Debit</td><td>Credit</td></tr><tr><td>Liabilities</td><td>Credit</td><td>Debit</td></tr><tr><td>Capital / equity</td><td>Credit</td><td>Debit</td></tr><tr><td>Revenue / income</td><td>Credit</td><td>Debit</td></tr></tbody></table></div>
+    </section>
+    <section class="view" id="ledger">
+      <div class="panel"><h3>General ledger</h3><p class="sub">Account balances are calculated from the practice journal. Debit balances are shown as positive; credit balances are shown as negative in the internal calculation and labelled below.</p><div id="ledgerTable" class="table-wrap"></div></div>
+    </section>
+    <section class="view" id="reports">
+      <div class="grid">
+        <div class="stat"><div class="label">Total debits</div><div class="num" id="totalDebits">£0.00</div></div>
+        <div class="stat"><div class="label">Total credits</div><div class="num" id="totalCredits">£0.00</div></div>
+        <div class="stat"><div class="label">Trial balance</div><div class="num" id="tbStatus" style="font-size:18px">Empty</div></div>
+        <div class="stat"><div class="label">Net profit (simplified)</div><div class="num" id="netProfit">£0.00</div></div>
+      </div>
+      <div class="panel"><h3>Trial balance</h3><p class="sub">Extract account balances at the end of the period. This practice report uses simplified balances and does not include every year-end adjustment.</p><div id="trialBalance" class="table-wrap"></div></div>
+      <div class="panel"><h3>Simplified income statement</h3><p class="sub">Revenue less recorded expenses. This is a training estimate, not a complete statement: cost of sales and adjustments are excluded.</p><div id="incomeStatement" class="table-wrap"></div></div>
+      <div class="notice" id="tbHint">Record some transactions to generate your reports.</div>
+    </section>
+    <section class="view" id="practice">
+      <div class="panel"><h3>Practice & learn</h3><p class="sub">A-level-style starter questions. Choose an answer to check your understanding.</p><div class="badge">QUESTION <span id="qNumber">1</span> OF 5</div><div class="question" id="questionText"></div><div id="answerOptions"></div><div id="quizFeedback" aria-live="polite"></div><div class="form-actions"><button class="secondary" id="nextQuestion">Next question →</button><button class="secondary" onclick="resetQuiz()">Restart practice</button></div></div>
+      <div class="panel"><h3>Learning pathway</h3>
+        <div class="task"><span class="emoji">1️⃣</span><div><strong>Source documents</strong><p>Invoices, receipts, credit notes and bank statements.</p></div></div>
+        <div class="task"><span class="emoji">2️⃣</span><div><strong>Books of prime entry</strong><p>Record transactions in the correct day book or cash book.</p></div></div>
+        <div class="task"><span class="emoji">3️⃣</span><div><strong>Double entry & ledgers</strong><p>Post debits and credits, then balance accounts.</p></div></div>
+        <div class="task"><span class="emoji">4️⃣</span><div><strong>Trial balance</strong><p>Extract balances and investigate differences.</p></div></div>
+        <div class="task"><span class="emoji">5️⃣</span><div><strong>Financial statements</strong><p>Prepare an income statement and statement of financial position.</p></div></div>
+      </div>
+    </section>
+    <div class="footer">AcctiPro is an educational simulation only • Fictional business • No bank connection • Keep practising 💜</div>
+  </div>
+</main>
+</div>
+<script>
+const tasks=[
+ {type:'capital',description:'Opening capital — owner investment',amount:5000,date:'2026-10-01'},
+ {type:'creditPurchase',description:'Bright Supplies — inventory invoice 456',amount:680,date:'2026-10-02'},
+ {type:'rent',description:'Monthly shop rent',amount:350,date:'2026-10-03'},
+ {type:'creditSale',description:'Riverside Stores — credit sale',amount:1200,date:'2026-10-04'}
+];
+const types={
+ capital:{label:'Owner invests capital',debit:'Bank',credit:'Capital',explain:'Bank (asset) increases, so debit Bank. Capital (equity) increases, so credit Capital.'},
+ cashSale:{label:'Cash sale',debit:'Bank',credit:'Sales Revenue',explain:'Bank increases, so debit Bank. Sales revenue increases, so credit Sales Revenue.'},
+ creditSale:{label:'Credit sale',debit:'Trade Receivables',credit:'Sales Revenue',explain:'The customer owes the business, so debit Trade Receivables. Sales revenue increases, so credit Sales Revenue.'},
+ cashPurchase:{label:'Inventory purchase paid immediately',debit:'Inventory',credit:'Bank',explain:'Inventory increases, so debit Inventory. Bank decreases, so credit Bank.'},
+ creditPurchase:{label:'Inventory purchase on credit',debit:'Inventory',credit:'Trade Payables',explain:'Inventory increases, so debit Inventory. The amount owed to the supplier increases, so credit Trade Payables.'},
+ rent:{label:'Pay rent',debit:'Rent Expense',credit:'Bank',explain:'Rent is an expense, so debit Rent Expense. Bank decreases, so credit Bank.'},
+ utilities:{label:'Pay utilities',debit:'Utilities Expense',credit:'Bank',explain:'Utilities are an expense, so debit Utilities Expense. Bank decreases, so credit Bank.'},
+ equipment:{label:'Buy equipment from bank',debit:'Equipment',credit:'Bank',explain:'Equipment (a non-current asset) increases, so debit Equipment. Bank decreases, so credit Bank.'},
+ receipt:{label:'Receive money from a credit customer',debit:'Bank',credit:'Trade Receivables',explain:'Bank increases, so debit Bank. The customer now owes less, so credit Trade Receivables.'},
+ supplier:{label:'Pay a credit supplier',debit:'Trade Payables',credit:'Bank',explain:'The amount owed to the supplier decreases, so debit Trade Payables. Bank decreases, so credit Bank.'},
+ drawings:{label:'Owner withdraws cash (drawings)',debit:'Drawings',credit:'Bank',explain:'Drawings increase, so debit Drawings. Bank decreases, so credit Bank.'},
+ loan:{label:'Receive a bank loan',debit:'Bank',credit:'Bank Loan Payable',explain:'Bank (asset) increases, so debit Bank. The liability for the loan increases, so credit Bank Loan Payable.'}
+};
+let transactions=[],journal=[],completed=new Set(),selectedBusiness='SwiftTech Supplies';
+const money=n=>'£'+Number(n||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));const names={home:'Dashboard',transactions:'Transactions',journal:'Journal entries',ledger:'General ledger',reports:'Reports',practice:'Practice & learn'};document.getElementById('pageTitle').textContent=names[id];if(id==='journal')renderJournal();if(id==='ledger')renderLedger();if(id==='reports')renderReports();if(id==='transactions')renderTransactions();}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+document.getElementById('businessSelect').addEventListener('change',e=>{selectedBusiness=e.target.value;transactions=[];journal=[];completed.clear();renderAll();document.getElementById('txFeedback').innerHTML='<div class="notice">You switched to '+selectedBusiness+'. Each practice business starts with a fresh set of books.</div>';});
+function addTransaction({date,type,description,amount,note=''}){let n=Number(amount),t=types[type];if(!t||!Number.isFinite(n)||n<=0)return false;const id=Date.now()+Math.random();transactions.push({id,date,type,description,amount:n,note});journal.push({id,date,description,account:t.debit,side:'Dr',amount:n,explain:t.explain},{id,date,description,account:t.credit,side:'Cr',amount:n,explain:t.explain});if(tasks.some(x=>x.type===type&&Math.abs(x.amount-n)<.001))completed.add(tasks.findIndex(x=>x.type===type&&Math.abs(x.amount-n)<.001));renderAll();return true;}
+document.getElementById('transactionForm').addEventListener('submit',e=>{e.preventDefault();const data={date:document.getElementById('txDate').value,type:document.getElementById('txType').value,description:document.getElementById('txDescription').value.trim(),amount:document.getElementById('txAmount').value,note:document.getElementById('txNote').value.trim()};if(!data.description||!addTransaction(data))return;const t=types[data.type];document.getElementById('txFeedback').innerHTML='<div class="notice success"><strong>Transaction recorded!</strong><br>Debit: '+t.debit+' '+money(data.amount)+'<br>Credit: '+t.credit+' '+money(data.amount)+'<br><br>'+t.explain+'<br><em>Exam tip:</em> Always identify the accounts affected before deciding which to debit and credit.</div>';document.getElementById('txDescription').value='';document.getElementById('txAmount').value='';document.getElementById('txNote').value='';});
+function loadTask(i){const t=tasks[i];showView('transactions');document.getElementById('txDate').value=t.date;document.getElementById('txType').value=t.type;document.getElementById('txDescription').value=t.description;document.getElementById('txAmount').value=t.amount;document.getElementById('txNote').value='';document.getElementById('txDescription').focus();}
+function tableOrEmpty(rows,heads){if(!rows.length)return '<div class="empty">Nothing here yet. Record a transaction to get started.</div>';return '<table><thead><tr>'+heads.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>'}
+function renderTransactions(){const rows=transactions.slice().reverse().map(t=>'<tr><td>'+t.date+'</td><td>'+escapeHtml(t.description)+'</td><td>'+types[t.type].label+'</td><td class="money">'+money(t.amount)+'</td><td><button class="secondary" onclick="deleteTransaction('+t.id+')">Delete</button></td></tr>');const out=tableOrEmpty(rows,['Date','Description','Type','Amount','Action']);document.getElementById('allTransactions').innerHTML=out;document.getElementById('recentTransactions').innerHTML=transactions.length?tableOrEmpty(transactions.slice(-5).reverse().map(t=>'<tr><td>'+t.date+'</td><td>'+escapeHtml(t.description)+'</td><td class="money">'+money(t.amount)+'</td></tr>'),['Date','Description','Amount']):'<div class="empty">No transactions yet. Start by recording your first transaction.</div>';}
+function deleteTransaction(id){transactions=transactions.filter(t=>t.id!==id);journal=journal.filter(j=>j.id!==id);renderAll();}
+function renderJournal(){document.getElementById('journalTable').innerHTML=tableOrEmpty(journal.map(j=>'<tr><td>'+j.date+'</td><td>'+escapeHtml(j.description)+'</td><td>'+j.account+'</td><td><strong>'+j.side+'</strong></td><td class="money">'+money(j.amount)+'</td><td><button class="secondary" onclick="alert('+JSON.stringify(j.explain).replace(/'/g,"\\'")+')">Why?</button></td></tr>'),['Date','Transaction','Account','Entry','Amount','Explanation']);}
+function balances(){let b={};journal.forEach(j=>{if(!b[j.account])b[j.account]=0;b[j.account]+=j.side==='Dr'?j.amount:-j.amount;});return b;}
+function renderLedger(){const b=balances();document.getElementById('ledgerTable').innerHTML=tableOrEmpty(Object.keys(b).sort().map(a=>'<tr><td>'+a+'</td><td>'+(b[a]>=0?'Debit balance':'Credit balance')+'</td><td class="money">'+money(Math.abs(b[a]))+'</td></tr>'),['Account','Balance type','Balance']);}
+function renderReports(){let b=balances(),debits=journal.filter(j=>j.side==='Dr').reduce((s,j)=>s+j.amount,0),credits=journal.filter(j=>j.side==='Cr').reduce((s,j)=>s+j.amount,0);document.getElementById('totalDebits').textContent=money(debits);document.getElementById('totalCredits').textContent=money(credits);let balanced=Math.abs(debits-credits)<.005;document.getElementById('tbStatus').textContent=journal.length?(balanced?'Balanced':'Check entries'):'Empty';document.getElementById('tbStatus').style.color=balanced?'var(--green)':'var(--red)';let rows=Object.keys(b).sort().map(a=>{let v=b[a];return '<tr><td>'+a+'</td><td class="money">'+(v>0?money(v):'—')+'</td><td class="money">'+(v<0?money(-v):'—')+'</td></tr>'});document.getElementById('trialBalance').innerHTML=tableOrEmpty(rows,['Account','Debit (£)','Credit (£)'])+(journal.length?'<div style="padding:12px;font-weight:800">Total: <span style="float:right">'+money(debits)+' Dr / '+money(credits)+' Cr</span></div>':'');let rev=(b['Sales Revenue']||0)*-1,expenses=['Rent Expense','Utilities Expense'].reduce((s,a)=>s+(b[a]||0),0),profit=rev-expenses;document.getElementById('netProfit').textContent=money(profit);document.getElementById('incomeStatement').innerHTML=journal.length?'<table><tbody><tr><td>Sales revenue recorded</td><td class="money">'+money(Math.max(0,rev))+'</td></tr><tr><td>Less: recorded expenses</td><td class="money">'+money(expenses)+'</td></tr><tr><th>Simplified profit before omitted adjustments</th><th class="money">'+money(profit)+'</th></tr></tbody></table>':'<div class="empty">Record transactions to prepare a simplified statement.</div>';document.getElementById('tbHint').textContent=journal.length?(balanced?'Your journal is balanced because total debits equal total credits. Important: a balanced trial balance does not prove that every transaction is correct.':'Your debit and credit totals differ. Check your journal entries.'):'Record some transactions to generate your reports.';}
+function renderAll(){renderTransactions();renderJournal();renderLedger();renderReports();document.getElementById('statTransactions').textContent=transactions.length;document.getElementById('statEntries').textContent=journal.length;document.getElementById('statTasks').textContent=completed.size+' / 5';document.getElementById('statStatus').textContent=journal.length?(Math.abs(journal.filter(j=>j.side==='Dr').reduce((s,j)=>s+j.amount,0)-journal.filter(j=>j.side==='Cr').reduce((s,j)=>s+j.amount,0))<.005?'Balanced':'Check books'):'Not started';document.getElementById('progressBar').style.width=(completed.size/5*100)+'%';document.getElementById('progressText').textContent=Math.round(completed.size/5*100)+'% of tasks completed';}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const qs=[
+{q:'The owner puts £2,000 of personal money into the business bank account. Which entry is correct?',a:['Dr Capital £2,000; Cr Bank £2,000','Dr Bank £2,000; Cr Capital £2,000','Dr Sales £2,000; Cr Bank £2,000'],c:1,why:'Bank is an asset that increases (debit). Capital increases (credit).'},
+{q:'A business buys goods for resale for £400 on credit. Which account is credited?',a:['Inventory / Purchases','Bank','Trade Payables'],c:2,why:'The business owes the supplier, so Trade Payables (a liability) increases and is credited.'},
+{q:'A customer pays £250 that they owed from an earlier credit sale. What happens?',a:['Dr Bank; Cr Trade Receivables','Dr Trade Receivables; Cr Sales Revenue','Dr Bank; Cr Sales Revenue'],c:0,why:'Bank increases and the customer debt decreases. Do not record sales revenue a second time.'},
+{q:'Which statement about a trial balance is correct?',a:['It proves that all accounting records are correct','It lists ledger balances and checks whether total debits equal total credits','It contains only assets and liabilities'],c:1,why:'A trial balance checks arithmetic equality, but errors such as complete omission may remain undetected.'},
+{q:'Rent of £600 is paid from the business bank account. What is the correct double entry?',a:['Dr Bank; Cr Rent Expense','Dr Rent Expense; Cr Bank','Dr Capital; Cr Bank'],c:1,why:'Expenses increase on the debit side; the bank asset decreases on the credit side.'}
+];let qi=0,answered=false;
+function renderQuiz(){let q=qs[qi];document.getElementById('qNumber').textContent=qi+1;document.getElementById('questionText').textContent=q.q;document.getElementById('answerOptions').innerHTML=q.a.map((a,i)=>'<button class="answer" onclick="checkAnswer('+i+')">'+String.fromCharCode(65+i)+'. '+a+'</button>').join('');document.getElementById('quizFeedback').innerHTML='';answered=false;}
+function checkAnswer(i){if(answered)return;answered=true;let q=qs[qi],ok=i===q.c;document.getElementById('quizFeedback').innerHTML='<div class="notice '+(ok?'success':'')+'"><strong>'+(ok?'Correct! Well done.':'Not quite — review the rule.')+'</strong><br>'+q.why+'</div>';document.querySelectorAll('.answer').forEach((b,j)=>{if(j===q.c)b.style.borderColor='var(--green)';if(j===i&&!ok)b.style.borderColor='var(--red)';});}
+document.getElementById('nextQuestion').addEventListener('click',()=>{qi=(qi+1)%qs.length;renderQuiz();});
+function resetQuiz(){qi=0;renderQuiz();}
+renderAll();renderQuiz();
+</script>
+
+<script>
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+}
+</script>
+</body>
+</html>
